@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unit09-scheduler
+  namespace: unit09-backend
+  labels:
+    app: unit09-scheduler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: unit09-scheduler
+  template:
+    metadata:
+      labels:
+        app: unit09-scheduler
+    spec:
+      containers:
+        - name: scheduler
+          image: unit09/scheduler:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: UNIT09_API_BASE
+              valueFrom:
+                configMapKeyRef:
+                  name: unit09-engine-config
+                  key: apiBaseUrl
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"

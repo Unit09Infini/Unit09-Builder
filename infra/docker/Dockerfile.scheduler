@@ -1,0 +1,14 @@
+FROM node:20-alpine AS base
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+COPY package.json package-lock.json* ./
+RUN npm install --omit=dev || npm install
+
+COPY . .
+
+RUN npm run build || echo "no build step, continuing"
+
+CMD ["npm", "run", "scheduler"]

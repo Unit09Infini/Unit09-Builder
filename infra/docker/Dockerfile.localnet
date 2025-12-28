@@ -1,0 +1,5 @@
+FROM solanalabs/solana:v1.18.18
+
+EXPOSE 8899 8900
+
+CMD ["solana-test-validator", "--reset", "--quiet", "--rpc-port", "8899"]

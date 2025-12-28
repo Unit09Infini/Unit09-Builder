@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: unit09-backend
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: unit09-monitoring

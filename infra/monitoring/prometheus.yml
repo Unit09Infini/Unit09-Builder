@@ -1,0 +1,22 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: "unit09-api"
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - "unit09-api-metrics.unit09-backend.svc.cluster.local:9464"
+
+  - job_name: "unit09-worker"
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - "unit09-worker.unit09-backend.svc.cluster.local:9464"
+
+  - job_name: "unit09-scheduler"
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - "unit09-scheduler.unit09-backend.svc.cluster.local:9464"

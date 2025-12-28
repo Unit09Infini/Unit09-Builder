@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: unit09-engine-config
+  namespace: unit09-backend
+data:
+  apiBaseUrl: "http://unit09-api.unit09-backend.svc.cluster.local/api"
+  engineBaseUrl: "http://unit09-worker.unit09-backend.svc.cluster.local"
+  defaultPipelineMode: "full"

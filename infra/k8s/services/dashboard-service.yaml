@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: unit09-dashboard
+  namespace: unit09-backend
+  labels:
+    app: unit09-dashboard
+spec:
+  type: ClusterIP
+  selector:
+    app: unit09-dashboard
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000

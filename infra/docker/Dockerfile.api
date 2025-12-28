@@ -1,0 +1,16 @@
+FROM node:20-alpine AS base
+
+WORKDIR /app
+
+ENV NODE_ENV=production     PORT=8080
+
+COPY package.json package-lock.json* ./
+RUN npm install --omit=dev || npm install
+
+COPY . .
+
+RUN npm run build || echo "no build step, continuing"
+
+EXPOSE 8080
+
+CMD ["npm", "run", "start"]

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: unit09-worker-config
+  namespace: unit09-backend
+data:
+  queueUrl: "redis://unit09-queue.unit09-backend.svc.cluster.local:6379"
+  maxConcurrentJobs: "4"
+  jobVisibilityTimeoutSeconds: "600"
