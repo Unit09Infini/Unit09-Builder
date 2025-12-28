@@ -1,0 +1,24 @@
+{
+  "name": "@unit09/shared-types",
+  "version": "0.1.0",
+  "description": "Shared TypeScript domain types for the Unit09 on-chain AI raccoon ecosystem.",
+  "private": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rimraf dist",
+    "lint": "eslint src --ext .ts"
+  },
+  "keywords": [
+    "solana",
+    "unit09",
+    "types",
+    "sdk",
+    "ai"
+  ],
+  "license": "MIT"
+}
