@@ -1,0 +1,33 @@
+{
+  "name": "@unit09/sdk",
+  "version": "0.1.0",
+  "description": "TypeScript client SDK for the Unit09 on-chain AI raccoon program on Solana.",
+  "private": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rimraf dist",
+    "lint": "eslint src --ext .ts"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.95.0",
+    "@coral-xyz/anchor": "^0.29.0",
+    "@unit09/shared-types": "0.1.0"
+  },
+  "peerDependencies": {
+    "@solana/web3.js": "^1.95.0",
+    "@coral-xyz/anchor": "^0.29.0"
+  },
+  "license": "MIT",
+  "keywords": [
+    "solana",
+    "anchor",
+    "sdk",
+    "unit09",
+    "ai"
+  ]
+}
