@@ -8,7 +8,7 @@ to responsibly report vulnerabilities.
 Unit09 is an evolving project. The maintainers will typically provide security
 fixes for:
 
-- The latest stable release (for example, `0.x.y`)
+- The latest stable release (`0.1.1`)
 - The development branch (`main`) when appropriate
 
 Older releases may not receive security fixes unless a specific agreement is
