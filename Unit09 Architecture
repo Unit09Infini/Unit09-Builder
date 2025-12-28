@@ -1,0 +1,420 @@
+unit09/
+├─ README.md                 # Project overview, quickstart, philosophy
+├─ LICENSE
+├─ CONTRIBUTING.md           # How to contribute
+├─ CODE_OF_CONDUCT.md
+├─ CHANGELOG.md
+├─ SECURITY.md               # Security policy, how to report vulnerabilities
+├─ GOVERNANCE.md             # Optional: project governance, decisions, roles
+├─ package.json
+├─ pnpm-workspace.yaml
+├─ tsconfig.base.json
+├─ .editorconfig
+├─ .eslintrc.cjs
+├─ .prettierrc
+├─ .gitignore
+├─ .dockerignore
+├─ .nvmrc
+├─ .env.example              # Base env template
+├─ .env.development.example
+├─ .env.production.example
+└─ config/
+   ├─ default.yaml           # Shared default config
+   ├─ development.yaml
+   ├─ production.yaml
+   └─ schema.json            # JSON schema for config validation
+
+contracts/
+└─ unit09-program/
+   ├─ Anchor.toml
+   ├─ Cargo.toml
+   ├─ Xargo.toml
+   ├─ program-id.md
+   ├─ programs/
+   │  └─ unit09_program/
+   │     └─ src/
+   │        ├─ lib.rs              # main entry, module wiring
+   │        ├─ constants.rs        # seeds, bumps, limits
+   │        ├─ errors.rs           # on-chain error codes
+   │        ├─ events.rs           # events: repo observed, module registered, fork created...
+   │        ├─ state/
+   │        │  ├─ config.rs        # global config (admin, fees, limits)
+   │        │  ├─ repo.rs          # tracked repositories
+   │        │  ├─ module.rs        # generated modules metadata
+   │        │  ├─ module_version.rs# version history of modules
+   │        │  ├─ fork.rs          # fork entities (Unit09 variants)
+   │        │  ├─ lifecycle.rs     # status timeline, last activity
+   │        │  ├─ metrics.rs       # counters, aggregates
+   │        │  └─ authority.rs     # access roles, authority model
+   │        ├─ instructions/
+   │        │  ├─ mod.rs
+   │        │  ├─ initialize.rs            # init config
+   │        │  ├─ set_config.rs            # update config (authorized)
+   │        │  ├─ register_repo.rs         # track a new repo
+   │        │  ├─ update_repo.rs           # update repo metadata
+   │        │  ├─ register_module.rs       # register generated module
+   │        │  ├─ update_module.rs         # update module metadata / version
+   │        │  ├─ link_module_to_repo.rs   # relate module to repo
+   │        │  ├─ create_fork.rs           # create Unit09 fork
+   │        │  ├─ update_fork_state.rs     # change fork state
+   │        │  ├─ record_observation.rs    # log code observation stats
+   │        │  ├─ record_metrics.rs        # update aggregates
+   │        │  └─ set_metadata.rs          # generic metadata updates
+   │        └─ utils/
+   │           ├─ seeds.rs                 # PDA seeds
+   │           ├─ validators.rs            # common account validation helpers
+   │           └─ time.rs                  # timestamp helpers
+   ├─ idl/
+   │  ├─ unit09_program.json
+   │  └─ types.d.ts
+   ├─ scripts/
+   │  ├─ generate-idl.ts
+   │  ├─ deploy-localnet.ts
+   │  ├─ deploy-devnet.ts
+   │  └─ verify-on-explorer.ts
+   └─ tests/
+      ├─ helpers/
+      │  ├─ provider.ts
+      │  ├─ accounts.ts
+      │  ├─ builders.ts           # builders for test data
+      │  └─ assertions.ts
+      ├─ unit09_init.spec.ts
+      ├─ unit09_repos.spec.ts
+      ├─ unit09_modules.spec.ts
+      ├─ unit09_forks.spec.ts
+      └─ unit09_metrics.spec.ts
+
+packages/
+├─ shared-types/
+│  ├─ package.json
+│  └─ src/
+│     ├─ index.ts
+│     ├─ repo.ts           # Repo type definitions
+│     ├─ module.ts         # Module types
+│     ├─ fork.ts           # Fork types
+│     ├─ lifecycle.ts
+│     ├─ metrics.ts
+│     ├─ events.ts
+│     ├─ pipeline.ts       # pipeline-level DTOs
+│     └─ errors.ts
+│
+├─ sdk/
+│  ├─ package.json
+│  ├─ tsconfig.json
+│  ├─ src/
+│  │  ├─ index.ts
+│  │  ├─ client.ts         # main Unit09 client
+│  │  ├─ connection.ts     # connection helpers
+│  │  ├─ config.ts
+│  │  ├─ accounts/
+│  │  │  ├─ configAccount.ts
+│  │  │  ├─ repoAccount.ts
+│  │  │  ├─ moduleAccount.ts
+│  │  │  └─ forkAccount.ts
+│  │  ├─ instructions/
+│  │  │  ├─ initialize.ts
+│  │  │  ├─ registerRepo.ts
+│  │  │  ├─ updateRepo.ts
+│  │  │  ├─ registerModule.ts
+│  │  │  ├─ updateModule.ts
+│  │  │  ├─ linkModule.ts
+│  │  │  ├─ createFork.ts
+│  │  │  └─ updateFork.ts
+│  │  ├─ queries/
+│  │  │  ├─ getConfig.ts
+│  │  │  ├─ getRepoById.ts
+│  │  │  ├─ listRepos.ts
+│  │  │  ├─ listModulesByRepo.ts
+│  │  │  ├─ listForks.ts
+│  │  │  └─ getGlobalStats.ts
+│  │  └─ utils/
+│  │     ├─ errors.ts
+│  │     ├─ parsers.ts
+│  │     └─ types.ts
+│  └─ README.md
+│
+├─ core-engine/
+│  ├─ package.json
+│  ├─ tsconfig.json
+│  ├─ src/
+│  │  ├─ index.ts
+│  │  ├─ config/
+│  │  │  ├─ engineConfig.ts
+│  │  │  ├─ schema.ts       # runtime config validation schema
+│  │  │  └─ defaults.ts
+│  │  ├─ pipeline/
+│  │  │  ├─ index.ts
+│  │  │  ├─ types.ts
+│  │  │  ├─ observeCode.ts
+│  │  │  ├─ detectLanguage.ts
+│  │  │  ├─ parseProject.ts
+│  │  │  ├─ buildCodeGraph.ts
+│  │  │  ├─ decomposeModules.ts
+│  │  │  ├─ generateModuleArtifacts.ts
+│  │  │  ├─ assembleBuildPlan.ts
+│  │  │  ├─ validateModules.ts
+│  │  │  ├─ syncOnChain.ts
+│  │  │  └─ runFullPipeline.ts
+│  │  ├─ analyzers/
+│  │  │  ├─ rustAnalyzer.ts
+│  │  │  ├─ anchorAnalyzer.ts
+│  │  │  ├─ typescriptAnalyzer.ts
+│  │  │  ├─ configAnalyzer.ts
+│  │  │  └─ multiLanguageRouter.ts
+│  │  ├─ generators/
+│  │  │  ├─ moduleScaffold.ts
+│  │  │  ├─ instructionTemplates.ts
+│  │  │  ├─ deployScripts.ts
+│  │  │  └─ frontendStubs.ts
+│  │  ├─ graph/
+│  │  │  ├─ codeGraph.ts
+│  │  │  └─ moduleGraph.ts
+│  │  ├─ ai/
+│  │  │  ├─ llmClient.ts
+│  │  │  ├─ promptBuilder.ts
+│  │  │  └─ postProcessing.ts
+│  │  ├─ adapters/
+│  │  │  ├─ githubAdapter.ts
+│  │  │  ├─ gitLocalAdapter.ts
+│  │  │  └─ solanaAdapter.ts
+│  │  ├─ logging/
+│  │  │  ├─ logger.ts
+│  │  │  └─ metrics.ts
+│  │  └─ utils/
+│  │     ├─ fsHelpers.ts
+│  │     ├─ env.ts
+│  │     ├─ validation.ts
+│  │     └─ error.ts
+│  └─ README.md
+│
+├─ cli-kit/
+│  ├─ package.json
+│  └─ src/
+│     ├─ index.ts
+│     ├─ ui/
+│     │  ├─ banner.ts
+│     │  ├─ prompts.ts
+│     │  ├─ spinner.ts
+│     │  └─ table.ts
+│     ├─ logger.ts
+│     └─ fs.ts
+│
+└─ testing-utils/
+   ├─ package.json
+   └─ src/
+      ├─ localnet.ts        # spin local Solana validator
+      ├─ wallet.ts
+      ├─ unit09Fixture.ts
+      ├─ snapshots.ts
+      └─ time.ts
+
+services/
+├─ api/
+│  ├─ package.json
+│  ├─ tsconfig.json
+│  ├─ src/
+│  │  ├─ index.ts
+│  │  ├─ server.ts             # http server
+│  │  ├─ config.ts
+│  │  ├─ routes/
+│  │  │  ├─ health.ts
+│  │  │  ├─ repos.ts
+│  │  │  ├─ modules.ts
+│  │  │  ├─ forks.ts
+│  │  │  ├─ pipeline.ts
+│  │  │  └─ stats.ts
+│  │  ├─ controllers/
+│  │  │  ├─ healthController.ts
+│  │  │  ├─ reposController.ts
+│  │  │  ├─ modulesController.ts
+│  │  │  ├─ forksController.ts
+│  │  │  ├─ pipelineController.ts
+│  │  │  └─ statsController.ts
+│  │  ├─ middleware/
+│  │  │  ├─ errorHandler.ts
+│  │  │  ├─ requestLogger.ts
+│  │  │  ├─ authGuard.ts
+│  │  │  └─ rateLimiter.ts
+│  │  ├─ services/
+│  │  │  ├─ unit09Service.ts
+│  │  │  └─ pipelineService.ts
+│  │  ├─ clients/
+│  │  │  ├─ unit09SdkClient.ts
+│  │  │  ├─ coreEngineClient.ts
+│  │  │  └─ queueClient.ts
+│  │  └─ utils/
+│  │     ├─ httpErrors.ts
+│  │     └─ validators.ts
+│  ├─ Dockerfile
+│  └─ README.md
+│
+├─ worker/
+│  ├─ package.json
+│  ├─ tsconfig.json
+│  ├─ src/
+│  │  ├─ index.ts
+│  │  ├─ config.ts
+│  │  ├─ jobs/
+│  │  │  ├─ observeRepoJob.ts
+│  │  │  ├─ analyzeRepoJob.ts
+│  │  │  ├─ decomposeJob.ts
+│  │  │  ├─ generateModulesJob.ts
+│  │  │  ├─ validateModulesJob.ts
+│  │  │  ├─ syncOnChainJob.ts
+│  │  │  └─ forkEvolutionJob.ts
+│  │  ├─ queue/
+│  │  │  ├─ jobTypes.ts
+│  │  │  ├─ jobQueue.ts
+│  │  │  └─ jobHandlers.ts
+│  │  └─ utils/
+│  │     ├─ logger.ts
+│  │     └─ metrics.ts
+│  ├─ Dockerfile
+│  └─ README.md
+│
+└─ scheduler/
+   ├─ package.json
+   ├─ src/
+   │  ├─ index.ts
+   │  ├─ config.ts
+   │  └─ schedules/
+   │     ├─ periodicObserve.ts    # regularly observe repos
+   │     ├─ periodicSync.ts       # sync metrics on-chain
+   │     └─ cleanup.ts            # cleanup stale jobs
+   └─ README.md
+
+cli/
+├─ package.json
+├─ tsconfig.json
+└─ src/
+   ├─ index.ts               # CLI entry
+   ├─ commands/
+   │  ├─ init.ts             # unit09 init
+   │  ├─ config.ts           # unit09 config set/get
+   │  ├─ link-repo.ts        # unit09 link-repo <url>
+   │  ├─ run-pipeline.ts     # unit09 run-pipeline <repo>
+   │  ├─ list-modules.ts     # unit09 list-modules
+   │  ├─ deploy-module.ts    # unit09 deploy-module <id>
+   │  ├─ create-fork.ts      # unit09 fork create
+   │  └─ show-stats.ts       # unit09 stats
+   └─ utils/
+      ├─ logger.ts
+      ├─ spinner.ts
+      └─ env.ts
+
+apps/
+├─ dashboard/
+│  ├─ package.json
+│  ├─ next.config.mjs
+│  ├─ tsconfig.json
+│  ├─ public/
+│  │  ├─ favicon.ico
+│  │  ├─ logo.svg
+│  │  └─ og.png
+│  ├─ src/
+│  │  ├─ pages/
+│  │  │  ├─ index.tsx            # overview
+│  │  │  ├─ repos.tsx            # observed repos list
+│  │  │  ├─ modules.tsx          # module gallery
+│  │  │  ├─ forks.tsx            # fork explorer
+│  │  │  └─ stats.tsx            # metrics dashboard
+│  │  ├─ components/
+│  │  │  ├─ layout/
+│  │  │  ├─ charts/
+│  │  │  └─ tables/
+│  │  ├─ lib/
+│  │  │  ├─ apiClient.ts
+│  │  │  └─ solanaClient.ts
+│  │  └─ styles/
+│  │     └─ globals.css
+│  └─ README.md
+│
+└─ docs-site/
+   ├─ package.json
+   ├─ next.config.mjs
+   ├─ tsconfig.json
+   ├─ src/
+   │  ├─ pages/
+   │  │  ├─ index.tsx
+   │  │  ├─ getting-started.tsx
+   │  │  ├─ workflow.tsx
+   │  │  ├─ modules.tsx
+   │  │  ├─ forks.tsx
+   │  │  └─ api.tsx
+   │  └─ components/
+   │     ├─ markdownRenderer.tsx
+   │     └─ layout.tsx
+   └─ README.md
+
+examples/
+├─ simple-anchor-project/
+│  ├─ README.md                 # A very small Anchor project used as input
+│  └─ ...
+├─ unit09-local-demo/
+│  ├─ docker-compose.yml        # localnet + api + worker
+│  ├─ README.md
+│  └─ scripts/
+│     ├─ run_localnet.sh
+│     ├─ seed_demo_data.ts
+│     └─ demo_workflow.ts       # runs observe → decompose → generate → sync
+└─ module-gallery/
+   ├─ README.md
+   └─ modules/
+      ├─ token-vesting/
+      ├─ basic-mint/
+      └─ access-control/
+
+infra/
+├─ docker/
+│  ├─ Dockerfile.api
+│  ├─ Dockerfile.worker
+│  ├─ Dockerfile.scheduler
+│  └─ Dockerfile.localnet
+├─ k8s/
+│  ├─ namespaces.yaml
+│  ├─ deployments/
+│  │  ├─ api-deployment.yaml
+│  │  ├─ worker-deployment.yaml
+│  │  └─ scheduler-deployment.yaml
+│  ├─ services/
+│  │  ├─ api-service.yaml
+│  │  └─ dashboard-service.yaml
+│  ├─ ingress/
+│  │  └─ ingress.yaml
+│  └─ configmaps/
+│     ├─ engine-config.yaml
+│     └─ worker-config.yaml
+├─ terraform/
+│  ├─ main.tf
+│  ├─ variables.tf
+│  ├─ outputs.tf
+│  └─ README.md
+└─ monitoring/
+   ├─ prometheus.yml
+   ├─ grafana-dashboards/
+   │  └─ unit09-overview.json
+   └─ README.md
+
+docs/
+├─ README.md
+├─ getting-started.md
+├─ installation.md
+├─ configuration.md
+├─ architecture.md
+├─ workflow.md
+├─ onchain-design.md
+├─ engine-design.md
+├─ modules-and-forks.md
+├─ api-reference.md
+├─ cli-usage.md
+├─ deployment-guide.md
+└─ faq.md
+
+.github/
+└─ workflows/
+   ├─ ci.yml                # lint + typecheck
+   ├─ tests.yml             # unit + integration tests
+   ├─ lint.yml
+   ├─ build-and-publish.yml # build packages, publish to registry
+   ├─ deploy-preview.yml    # deploy previews for PRs
+   └─ security-scan.yml     # dependency / code scan
