@@ -2,7 +2,7 @@ Unit09 Open Source License (MIT-style)
 
 Version 1.0
 
-Copyright (c) [YEAR] [COPYRIGHT HOLDER]
+Copyright (c) [2025] [Unit09]
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files
