@@ -1,0 +1,32 @@
+{
+  "name": "@unit09/scheduler",
+  "version": "0.1.0",
+  "description": "Scheduler for recurring Unit09 jobs.",
+  "private": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
+  },
+  "dependencies": {
+    "node-cron": "^3.0.3",
+    "pino": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/node-cron": "^3.0.11",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.7.2"
+  },
+  "license": "MIT",
+  "keywords": [
+    "unit09",
+    "scheduler",
+    "cron"
+  ]
+}

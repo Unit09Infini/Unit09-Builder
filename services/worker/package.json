@@ -1,0 +1,32 @@
+{
+  "name": "@unit09/worker",
+  "version": "0.1.0",
+  "description": "Background worker for Unit09 pipeline jobs.",
+  "private": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
+  },
+  "dependencies": {
+    "@unit09/core-engine": "0.1.0",
+    "@unit09/shared-types": "0.1.0",
+    "pino": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.7.2"
+  },
+  "license": "MIT",
+  "keywords": [
+    "unit09",
+    "worker",
+    "pipeline"
+  ]
+}
