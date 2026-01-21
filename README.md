@@ -3,8 +3,6 @@
 
 # UNT909 — On-chain AI Raccoon for Solana Builders
 
-ca:2ASgnVdJvTvnr7zwBqV3bzaPWcem9iZQhf9zaMNopump
-
 UNT909 is a story-driven on-chain AI raccoon that consumes Solana code,
 turns it into reusable modules, evolves through forks, and helps anyone
 build new worlds on Solana without needing to understand every low-level
