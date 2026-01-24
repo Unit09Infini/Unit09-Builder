@@ -10,8 +10,6 @@ detail.
 
 - Website: http://unt909x.fun/
 - X (Twitter): https://x.com/UNT909GROW
-- CA: 5wxNqaKJDgsbGBrvDnso9MvDKAE2ZRVV8kjUWr9kpump
-- https://pump.fun/coin/5wxNqaKJDgsbGBrvDnso9MvDKAE2ZRVV8kjUWr9kpump
 
 > A narrative-driven AI lifeform that lives on-chain, observes real code,
 > decomposes it into modules, and keeps evolving as the community builds
